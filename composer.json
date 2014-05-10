@@ -1,0 +1,12 @@
+{
+    "name": "mrprompt/balanca",
+    "require": {
+        "hyperthese/php-serial": "1.0.x-dev"
+    },
+    "authors": [
+        {
+            "name": "Thiago Paes",
+            "email": "mrprompt@gmail.com"
+        }
+    ]
+}

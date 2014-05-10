@@ -1,0 +1,55 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "8803c9f9c8f082ddf0ce4a90c2b3067e",
+    "packages": [
+        {
+            "name": "hyperthese/php-serial",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Xowap/PHP-Serial.git",
+                "reference": "e37668a0bfa688eda48509b6ba5639558e592ac4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Xowap/PHP-Serial/zipball/e37668a0bfa688eda48509b6ba5639558e592ac4",
+                "reference": "e37668a0bfa688eda48509b6ba5639558e592ac4",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GNU GPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "Rémy Sanchez",
+                    "email": "remy.sanchez@hyperthese.net"
+                }
+            ],
+            "description": "Multi-platform serial port access convenience class",
+            "time": "2014-02-21 00:23:26"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "hyperthese/php-serial": 20
+    },
+    "platform": [],
+    "platform-dev": []
+}
