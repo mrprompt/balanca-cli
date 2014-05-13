@@ -1,7 +1,9 @@
 {
     "name": "mrprompt/balanca",
     "require": {
-        "hyperthese/php-serial": "1.0.x-dev"
+        "hyperthese/php-serial":    "1.0.x-dev",
+        "mdlayher/serial":          "dev-master",
+        "themainframe/serially": "dev-master"
     },
     "authors": [
         {
