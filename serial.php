@@ -23,26 +23,15 @@ $serial->confParity("none");
 $serial->confCharacterLength(8);
 $serial->confStopBits(2);
 $serial->confFlowControl("none");
-$serial->deviceOpen();
-$serial->sendMessage(0x04);
-$serial->sendMessage(0x05);
-$read  = $serial->readPort();
-var_dump($read); exit;
+$serial->deviceOpen('r+b');
+echo 'porta aberta, pressione a tecla P na balanca para efetuar a leitura: ', PHP_EOL;
 
-// $serial = new serial\serial(PORT);
-// $serial->set_options(array(
-//     "baud"      => 9600,
-//     "bits"      => 8,
-//     "stop"      => 2,
-//     "parity"    => 0,
-// ));
-// $write = $serial->write(0x04 + 0x05);
-// $read  = $serial->read();
-// var_dump($read);
+$serial->sendMessage(pack("H*", "347"));
 
-// $manager = new Serially\ConnectionManager;
-// $connection = $manager->getConnection(PORT);
-// $connection->open();
-// $connection->writeLine(pack("H*", dechex(4)));
-// var_dump($connection->readByte(1));
+while (true) {
+    $read = $serial->readPort();
 
+    if (strlen($read) !== 0) {
+        echo $read, PHP_EOL;
+    }
+}

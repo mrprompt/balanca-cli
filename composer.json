@@ -1,9 +1,13 @@
 {
     "name": "mrprompt/balanca",
+    "version": "0.0.1",
+    "description": "read serial port",
+    "keywords": ["serial"],
+    "type": "library",
+    "license": "MIT",
     "require": {
-        "hyperthese/php-serial":    "1.0.x-dev",
-        "mdlayher/serial":          "dev-master",
-        "themainframe/serially": "dev-master"
+        "php":                      ">=5.3.0",
+        "hyperthese/php-serial":    "1.0.x-dev"
     },
     "authors": [
         {

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "2e36d591aed9e9603995d07779fd85e3",
+    "hash": "158e4dfd831e3abd164d97ce1ca2efeb",
     "packages": [
         {
             "name": "hyperthese/php-serial",
@@ -42,143 +42,16 @@
             ],
             "description": "Multi-platform serial port access convenience class",
             "time": "2014-02-21 00:23:26"
-        },
-        {
-            "name": "mdlayher/serial",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mdlayher/serial.git",
-                "reference": "557c90d80cb4971ca2d59ba9d531b91fb1abbcd4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mdlayher/serial/zipball/557c90d80cb4971ca2d59ba9d531b91fb1abbcd4",
-                "reference": "557c90d80cb4971ca2d59ba9d531b91fb1abbcd4",
-                "shasum": ""
-            },
-            "require": {
-                "ext-dio": "*",
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "serial": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Matt Layher",
-                    "email": "mdlayher@gmail.com",
-                    "homepage": "http://mdlayher.com/"
-                }
-            ],
-            "description": "PHP class utilizing Direct IO to interact with a RS232 serial port",
-            "homepage": "https://github.com/mdlayher/serial",
-            "keywords": [
-                "dio",
-                "rs232",
-                "serial"
-            ],
-            "time": "2013-03-14 18:23:20"
-        },
-        {
-            "name": "psr/log",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/log.git",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Psr\\Log\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for logging libraries",
-            "keywords": [
-                "log",
-                "psr",
-                "psr-3"
-            ],
-            "time": "2012-12-21 11:40:51"
-        },
-        {
-            "name": "themainframe/serially",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/themainframe/serially.git",
-                "reference": "61ade7cdad04800dae87e82fabd37c9123f6654f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/themainframe/serially/zipball/61ade7cdad04800dae87e82fabd37c9123f6654f",
-                "reference": "61ade7cdad04800dae87e82fabd37c9123f6654f",
-                "shasum": ""
-            },
-            "require": {
-                "psr/log": "1.0.*@dev"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Serially\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Damien Walsh",
-                    "email": "me@damow.net",
-                    "homepage": "http://www.damow.net/"
-                }
-            ],
-            "description": "Talk to serial devices in PHP",
-            "time": "2014-02-02 19:58:13"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "hyperthese/php-serial": 20,
-        "mdlayher/serial": 20,
-        "themainframe/serially": 20
+        "hyperthese/php-serial": 20
     },
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "platform": {
+        "php": ">=5.3.0"
+    },
+    "platform-dev": []
 }
