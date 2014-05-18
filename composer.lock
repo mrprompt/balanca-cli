@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "158e4dfd831e3abd164d97ce1ca2efeb",
+    "hash": "de8ab5f42a31170b353e3a893a01ac62",
     "packages": [
         {
             "name": "hyperthese/php-serial",
@@ -42,13 +42,58 @@
             ],
             "description": "Multi-platform serial port access convenience class",
             "time": "2014-02-21 00:23:26"
+        },
+        {
+            "name": "mdlayher/serial",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mdlayher/serial.git",
+                "reference": "557c90d80cb4971ca2d59ba9d531b91fb1abbcd4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mdlayher/serial/zipball/557c90d80cb4971ca2d59ba9d531b91fb1abbcd4",
+                "reference": "557c90d80cb4971ca2d59ba9d531b91fb1abbcd4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dio": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "serial": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Layher",
+                    "email": "mdlayher@gmail.com",
+                    "homepage": "http://mdlayher.com/"
+                }
+            ],
+            "description": "PHP class utilizing Direct IO to interact with a RS232 serial port",
+            "homepage": "https://github.com/mdlayher/serial",
+            "keywords": [
+                "dio",
+                "rs232",
+                "serial"
+            ],
+            "time": "2013-03-14 18:23:20"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "hyperthese/php-serial": 20
+        "hyperthese/php-serial": 20,
+        "mdlayher/serial": 20
     },
     "platform": {
         "php": ">=5.3.0"
