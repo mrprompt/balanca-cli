@@ -1,11 +1,17 @@
 <?php
+/**
+ * Leitura do visor da balança via porta serial
+ *
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
+dl('cairo.so');
+dl('php_gtk2.so');
+
 class Main extends GtkWindow
 {
     const APP_NOME  = 'LePeso';
-
     private $campos = array();
-    private $serial;
-    private $porta;
+    private $driver;
 
     /**
      * Construtor
@@ -31,88 +37,23 @@ class Main extends GtkWindow
         $main->pack_start($this->insereCampo('Preço por Kg', 60), false);
         $main->pack_start($this->insereCampo('Preço Total', 60), false);
 
-        $botaoAbrirPorta = new GtkButton;
-        $botaoAbrirPorta->set_label('Abrir Porta');
-        $botaoAbrirPorta->connect_simple('clicked', array($this, 'abrePorta'));
-
-        $botaoFecharPorta = new GtkButton;
-        $botaoFecharPorta->set_label('Fechar Porta');
-        $botaoFecharPorta->connect_simple('clicked', array($this, 'fechaPorta'));
-
-        $botaoLerPeso = new GtkButton;
-        $botaoLerPeso->set_label('Ler Peso');
-        $botaoLerPeso->connect_simple('clicked', array($this, 'lePeso'));
-
-        $botaoFechar = new GtkButton;
-        $botaoFechar->set_label('Sair');
-        $botaoFechar->connect_simple('clicked', array('gtk', 'main_quit'));
-
-        $botoes = new GtkHButtonBox;
-        $botoes->add($botaoAbrirPorta);
-        $botoes->add($botaoFecharPorta);
-        $botoes->add($botaoLerPeso);
-        $botoes->add($botaoFechar);
+        $botao = new GtkButton;
+        $botao->set_label('Ler Peso');
+        $botao->connect_simple('clicked', array($this, 'lePeso'));
 
         // insere os botões no container
-        $main->add($botoes);
+        $main->add($botao);
 
         // insere o container na tela principal
         $this->add($main);
 
         // setando a porta
-        $this->porta = trim($porta);
+        $this->driver = new LePeso($porta);
 
+        // boot
         $this->show_all();
-    }
 
-    /**
-     * Abre a porta para efetuar a leitura
-     *
-     * @return  boolean
-     */
-    public function abrePorta()
-    {
-        // abre a porta serial
-        $this->serial = new PhpSerial;
-        $this->serial->deviceSet($this->porta);
-        $this->serial->confBaudRate(9600);
-        $this->serial->confParity("none");
-        $this->serial->confCharacterLength(8);
-        $this->serial->confStopBits(2);
-        $this->serial->confFlowControl("none");
-
-        // se n conseguir abrir a porta, aborto tudo
-        if (false == $this->serial->deviceOpen('r+b')) {
-            $dialog = new GtkMessageDialog(null, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, 'Erro abrindo porta');
-            $dialog->run();
-            $dialog->destroy();
-
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Fecha a porta para liberar o recurso
-     *
-     * @return  boolean
-     */
-    public function fechaPorta()
-    {
-        // se n conseguir abrir a porta, aborto tudo
-        if (null == $this->serial) {
-            $dialog = new GtkMessageDialog(null, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, 'Erro fechando porta');
-            $dialog->run();
-            $dialog->destroy();
-
-            return false;
-        }
-
-        $this->serial->deviceClose();
-        $this->serial = null;
-
-        return true;
+        Gtk::main();
     }
 
     /**
@@ -122,45 +63,14 @@ class Main extends GtkWindow
      */
     public function lePeso()
     {
-        // se n conseguir abrir a porta, aborto tudo
-        if ($this->serial == null or $this->serial == false) {
-            $dialog = new GtkMessageDialog(null, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, 'A porta não está aberta');
-            $dialog->run();
-            $dialog->destroy();
+        $read   = $this->driver->read();
+        $pesos  = $this->driver->decode($read);
 
-            return false;
-        }
+        $this->campos['Peso em Kg']->set_text($pesos[0]);
+        $this->campos['Preço por Kg']->set_text($pesos[1]);
+        $this->campos['Preço Total']->set_text($pesos[2]);
 
-        $read = null;
-
-        do {
-            $write = $this->serial->sendMessage(chr(4) . chr(5));
-
-            sleep(1);
-
-            $read  = $this->serial->readPort();
-
-            /*
-             * Os dados da impressora vem separados pelo caracter de ESCAPE (chr 27 ou 0x1B)
-             * Deve vir um total de 56 caracteres separados da seguinte forma
-             *
-             * 18 a 23 - peso
-             * 30 a 36 - informação do preço por kg
-             * 43 a 49 - informação do total a pagar
-             */
-            preg_match_all('/[0-9]{1,3},[0-9]{2,3}/', substr($read, 18, 23), $pesoValor);
-            $peso       = (array_key_exists(0, $pesoValor[0])  ? $pesoValor[0][0] : 0);
-            $precoKg    = (array_key_exists(1, $pesoValor[0])  ? $pesoValor[0][1] : 0);
-
-            preg_match_all('/[0-9]{1,3},[0-9]{2}/', substr($read, 43, 49), $precoValor);
-            $precoTotal = (array_key_exists(0, $precoValor[0]) ? $precoValor[0][0] : 0);
-
-            $this->campos['Peso em Kg']->set_text($peso);
-            $this->campos['Preço por Kg']->set_text($precoKg);
-            $this->campos['Preço Total']->set_text($precoTotal);
-
-            return true;
-        } while ($read === null);
+        return true;
     }
 
     /**

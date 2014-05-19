@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "de8ab5f42a31170b353e3a893a01ac62",
+    "hash": "807dc348005583e54398b54a26b4ccdf",
     "packages": [
         {
             "name": "hyperthese/php-serial",
@@ -86,6 +86,63 @@
                 "serial"
             ],
             "time": "2013-03-14 18:23:20"
+        },
+        {
+            "name": "symfony/console",
+            "version": "dev-master",
+            "target-dir": "Symfony/Component/Console",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Console.git",
+                "reference": "50be4f30d0a93404e5d62b05fd7294492cf64c4f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/50be4f30d0a93404e5d62b05fd7294492cf64c4f",
+                "reference": "50be4f30d0a93404e5d62b05fd7294492cf64c4f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/event-dispatcher": "~2.1"
+            },
+            "suggest": {
+                "psr/log": "For using the console logger",
+                "symfony/event-dispatcher": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Console\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Console Component",
+            "homepage": "http://symfony.com",
+            "time": "2014-05-15 08:56:35"
         }
     ],
     "packages-dev": [],
@@ -93,7 +150,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "hyperthese/php-serial": 20,
-        "mdlayher/serial": 20
+        "mdlayher/serial": 20,
+        "symfony/console": 20
     },
     "platform": {
         "php": ">=5.3.0"
