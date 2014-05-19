@@ -4,8 +4,7 @@
  *
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-require 'app' . DIRECTORY_SEPARATOR . 'LePeso.php';
+require '../vendor/autoload.php';
 
 use \serial\serial as serial;
 

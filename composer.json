@@ -14,7 +14,7 @@
         "php":                      ">=5.4.4",
         "hyperthese/php-serial":    "1.0.x-dev",
         "mdlayher/serial":          "dev-master",
-        "symfony/console":          "2.5.*@dev"
+        "doctrine/orm":             "*"
     },
     "authors": [
         {

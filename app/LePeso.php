@@ -4,11 +4,21 @@
  *
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-use serial\serial;
+use serial\serial as Dio;
+use PhpSerial as Serial;
+use GtkMessageDialog as Dialog;
 
 class LePeso
 {
+    /**
+     * @var PhpSerial
+     */
     protected $serial;
+
+    /**
+     * @var serial\serial
+     */
+    protected $dio;
 
     /**
      * Abre a porta para efetuar a leitura
@@ -17,17 +27,17 @@ class LePeso
      */
     public function __construct($porta = '/dev/ttyUSB0')
     {
-        $serial = new serial($porta, O_RDWR);
-        $serial->set_options(array(
+        $this->dio = new Dio($porta, O_RDWR);
+        $this->dio->set_options(array(
             "baud"   => 9600,
             "bits"   => 8,
             "stop"   => 2,
             "parity" => 0,
         ));
-        $serial->write(chr(04) . chr(05));
-        $serial->close();
+        $this->dio->write(chr(04) . chr(05));
+        $this->dio->close();
 
-        $this->serial = new PhpSerial;
+        $this->serial = new Serial;
         $this->serial->deviceSet($porta);
         $this->serial->confBaudRate(9600);
         $this->serial->confParity("none");
@@ -38,7 +48,7 @@ class LePeso
 
         // se n conseguir abrir a porta, aborto tudo
         if (false == $this->serial) {
-            $dialog = new GtkMessageDialog(null, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, 'Erro abrindo porta.');
+            $dialog = new Dialog(null, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, 'Erro abrindo porta.');
             $dialog->run();
             $dialog->destroy();
 
@@ -51,13 +61,13 @@ class LePeso
     /**
      * Le o peso da balança, fica num loop infinito até retornar algo da porta
      *
-     * @return boolean
+     * @return string
      */
     public function read()
     {
         // se n conseguir abrir a porta, aborto tudo
         if ($this->serial == null or $this->serial == false) {
-            $dialog = new GtkMessageDialog(null, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, utf8_decode('A porta não está aberta.'));
+            $dialog = new Dialog(null, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, utf8_decode('A porta não está aberta.'));
             $dialog->run();
             $dialog->destroy();
 
@@ -66,7 +76,7 @@ class LePeso
 
         $read       = null;
         $tentativas = 1;
-        $limite     = 5;
+        $limite     = 10;
 
         while (strlen($read) !== 56 && $tentativas < $limite) {
             $this->serial->sendMessage(chr(04) . chr(05) . ' ');
@@ -76,7 +86,7 @@ class LePeso
         }
 
         if (strlen($read) !== 56) {
-            $dialog = new GtkMessageDialog(null, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, utf8_decode('Não foi possível efetuar a leitura.'));
+            $dialog = new Dialog(null, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, utf8_decode('Não foi possível efetuar a leitura.'));
             $dialog->run();
             $dialog->destroy();
 
@@ -89,8 +99,8 @@ class LePeso
     /**
      * Lê o retorno da balança e retorna os valores corretamente
      *
-     * @param  string $read [description]
-     * @return array        [description]
+     * @param  string $read
+     * @return array
      */
     public function decode($read)
     {

@@ -4,9 +4,6 @@
  *
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-dl('cairo.so');
-dl('php_gtk2.so');
-
 class Main extends GtkWindow
 {
     const APP_NOME  = 'LePeso';
