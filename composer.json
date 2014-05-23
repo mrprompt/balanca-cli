@@ -13,8 +13,7 @@
     "require": {
         "php":                      ">=5.4.4",
         "hyperthese/php-serial":    "1.0.x-dev",
-        "mdlayher/serial":          "dev-master",
-        "doctrine/orm":             "*"
+        "mdlayher/serial":          "dev-master"
     },
     "authors": [
         {
