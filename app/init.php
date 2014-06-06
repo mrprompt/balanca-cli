@@ -4,7 +4,7 @@
  *
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 define('PORT', (empty($argv[1]) ? '/dev/ttyUSB0' : $argv[1]));
 
