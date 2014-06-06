@@ -27,15 +27,17 @@ class LePeso
      */
     public function __construct($porta = '/dev/ttyUSB0')
     {
-        $this->dio = new Dio($porta, O_RDWR);
-        $this->dio->set_options(array(
-            "baud"   => 9600,
-            "bits"   => 8,
-            "stop"   => 2,
-            "parity" => 0,
-        ));
-        $this->dio->write(chr(04) . chr(05));
-        $this->dio->close();
+	if (extension_loaded('dio')) {
+		$this->dio = new Dio($porta, O_RDWR);
+		$this->dio->set_options(array(
+		    "baud"   => 9600,
+		    "bits"   => 8,
+		    "stop"   => 2,
+		    "parity" => 0,
+		));
+		$this->dio->write(chr(04) . chr(05));
+		$this->dio->close();
+	}
 
         $this->serial = new Serial;
         $this->serial->deviceSet($porta);
