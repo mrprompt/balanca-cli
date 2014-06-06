@@ -4,7 +4,7 @@
  *
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use \serial\serial as serial;
 
@@ -22,12 +22,18 @@ $serial->set_options(array(
 echo 'pressione a tecla P na balanca para efetuar a leitura: ', PHP_EOL;
 
 while (true) {
-    $serial->write(chr(04) . chr(05));
-    $read = $serial->read();
+    echo '.';
 
-    if (strlen($read) >= 55) {
-        $lePeso = new LePeso;
-        $pesos  = $lePeso->recupera($read);
-        var_dump($pesos);
+    $write = $serial->write(chr(0x04) . chr(0x05));
+
+    if (isset($write) && strlen($write) != 0) {
+	echo 'write: ';
+	var_dump($write);
+    }
+
+    $read  = $serial->read();
+    if (isset($read) && strlen($read) != 0) {
+	echo 'read: ';
+        var_dump($read);
     }
 }
